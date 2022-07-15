@@ -10,16 +10,16 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.TIMESTAMP(timezone=True), nullable=False)
     updated_at = db.Column(db.TIMESTAMP(timezone=True),
-                           nullable=True,
+                           nullable=False,
                            default=datetime.now())
 
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    # notes = db.relationship('Note',
-    #                         back_populates='user',
-    #                         cascade='all, delete')
+    notes = db.relationship('Note',
+                            back_populates='user',
+                            cascade='all, delete')
 
     @property
     def password(self):
@@ -33,10 +33,8 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email,
-            'createdAt': self.created_at,
-            'updateAt': self.updated_at
-        }
+        return {'id': self.id,
+                'username': self.username,
+                'email': self.email,
+                'createdAt': self.created_at,
+                'updateAt': self.updated_at}

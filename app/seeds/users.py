@@ -1,3 +1,4 @@
+from datetime import datetime
 from app.models import db, User
 
 
@@ -5,7 +6,8 @@ from app.models import db, User
 def seed_users():
     demo = User(username='demo',
                 email='demo@demo.io',
-                password='password')
+                password='password',
+                created_at=datetime.now())
 
     db.session.add(demo)
     db.session.commit()

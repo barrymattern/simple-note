@@ -2,11 +2,11 @@ from datetime import datetime
 from .db import db
 
 
-class Note:
+class Note(db.Model):
     __tablename__ = 'notes'
 
     id = db.Column(db.Integer, primary_key=True)
-    create_at = db.Column(db.TIMESTAMP(timezone=True), nullable=False)
+    created_at = db.Column(db.TIMESTAMP(timezone=True), nullable=False)
     updated_at = db.Column(db.TIMESTAMP(timezone=True),
                            nullable=False,
                            default=datetime.now())

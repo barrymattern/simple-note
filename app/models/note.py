@@ -21,5 +21,5 @@ class Note(db.Model):
         return {'id': self.id,
                 'title': self.title,
                 'body': self.body,
-                'createdAt': self.create_at,
+                'createdAt': self.created_at,
                 'updatedAt': self.updated_at}

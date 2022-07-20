@@ -7,7 +7,8 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import Note from './components/Note.js';
+import AllNotes from './components/AllNotes';
+import Note from './components/Note';
 import { authenticate } from './store/session';
 
 function App() {
@@ -39,11 +40,14 @@ function App() {
                 <ProtectedRoute path='/users/:userId' exact={true} >
                     <User />
                 </ProtectedRoute>
+                <ProtectedRoute path='/notes' exact={true}>
+                    <AllNotes />
+                </ProtectedRoute>
+                <ProtectedRoute path='/notes/:noteId' exact={true} >
+                    <Note />
+                </ProtectedRoute>
                 <ProtectedRoute path='/' exact={true} >
                     <h1>My Home Page</h1>
-                </ProtectedRoute>
-                <ProtectedRoute path='/notes'>
-                    <Note />
                 </ProtectedRoute>
             </Switch>
         </BrowserRouter>

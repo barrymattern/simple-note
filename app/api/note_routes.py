@@ -15,8 +15,6 @@ def get_note(id):
     GET Note by ID
     '''
     note = Note.query.get(id)
-    if not note:
-        return {'errors': ['Note does note exist']}, 404
     return note.to_dict()
 
 

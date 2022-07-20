@@ -22,8 +22,6 @@ def user(id):
     GET User by ID
     '''
     user = User.query.get(id)
-    if not user:
-        return {'errors': ['User does not exist']}, 404
     return user.to_dict()
 
 
@@ -33,10 +31,6 @@ def user_notes(id):
     '''
     GET all Notes by User ID
     '''
-    user = User.query.get(id)
-    if not user:
-        return {'errors': ['User does not exist']}, 404
-
     notes = Note.query.filter_by(user_id=id).all()
     return {'notes': {note.id: note.to_dict() for note in notes},
             'all_note_ids': [note.id for note in notes]}

@@ -23,7 +23,7 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_ALL_NOTES:
-            return { ...state, notes: action.payload };
+            return { ...state, userNotes: action.payload };
         default:
             return state;
     }

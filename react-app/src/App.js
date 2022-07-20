@@ -42,7 +42,7 @@ function App() {
                 <ProtectedRoute path='/' exact={true} >
                     <h1>My Home Page</h1>
                 </ProtectedRoute>
-                <ProtectedRoute path='/users/:userId/notes'>
+                <ProtectedRoute path='/notes'>
                     <Note />
                 </ProtectedRoute>
             </Switch>

@@ -1,25 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
-import { fetchAllNotes } from '../store/notes';
 
 const NavBar = () => {
-    const [loaded, setLoaded] = useState(false);
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.session.user);
-
-    useEffect(() => {
-        const get_user_notes = async () => {
-            await dispatch(fetchAllNotes(user.id));
-            setLoaded(true);
-        };
-
-        get_user_notes();
-    }, [dispatch, user]);
-
-    if (!loaded) return null;
-
     return (
         <nav>
             <ul>

@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import AllNotes from './components/AllNotes';
 import Note from './components/Note';
+import NewNoteForm from './components/NewNoteForm';
 import { authenticate } from './store/session';
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
                 </ProtectedRoute>
                 <ProtectedRoute path='/notes' exact={true}>
                     <AllNotes />
+                </ProtectedRoute>
+                <ProtectedRoute path='/notes/new' exact={true}>
+                    <NewNoteForm />
                 </ProtectedRoute>
                 <ProtectedRoute path='/notes/:noteId' exact={true} >
                     <Note />

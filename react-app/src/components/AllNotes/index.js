@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { fetchAllNotes } from "../../store/notesReducer";
 
 const AllNotes = () => {
@@ -31,12 +31,20 @@ const AllNotes = () => {
         </li>
     ));
 
-
     return (
-        <div>
-            <h1>All Notes</h1>
-            <ul>{displayNotes}</ul>
-        </div>
+        <>
+            <div>
+                <Link
+                    to='/notes/new'
+                >
+                    Create New Note
+                </Link>
+            </div>
+            <div>
+                <h1>All Notes</h1>
+                <ul>{displayNotes}</ul>
+            </div>
+        </>
     );
 };
 

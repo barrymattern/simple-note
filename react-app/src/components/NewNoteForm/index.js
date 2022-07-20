@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const NewNoteForm = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const dispatch = useDispatch();
+
+    const user = useSelector(state => state.session.user);
 
     const handleSubmit = (e) => {
         e.preventDefault();

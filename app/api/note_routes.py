@@ -30,7 +30,8 @@ def create_new_note():
         note = Note(title=form['title'].data,
                     body=form['body'].data,
                     user_id=form['user_id'].data,
-                    created_at=datetime.now())
+                    created_at=datetime.now(),
+                    updated_at=datetime.now())
         db.session.add(note)
         db.session.commit()
         return note.to_dict()

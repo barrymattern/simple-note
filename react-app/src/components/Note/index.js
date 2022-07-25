@@ -28,16 +28,36 @@ const Note = () => {
 
     const note = allNotesObj.notes[noteId]
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        
+        /** TODO
+         * Define 'DELETE' route on backend
+         * Define 'deleteNote' action
+         * Define 'fetchDeleteNote' thunk
+         * Refactor reducer to update state correctly
+         * If ok, history.push('/notes')
+         */
+    };
+
     return (
-        <div>
+        <>
             <div>
-                <h3>{note.title}</h3>
-                <small>{note.updatedAt}</small>
+                <div>
+                    <h3>{note.title}</h3>
+                    <small>{note.updatedAt}</small>
+                </div>
+                <div>
+                    <p>{note.body}</p>
+                </div>
             </div>
-            <div>
-                <p>{note.body}</p>
+            <div
+                className='btn delete-btn'
+                onClick={handleClick}
+            >
+                Delete
             </div>
-        </div>
+        </>
     );
 };
 

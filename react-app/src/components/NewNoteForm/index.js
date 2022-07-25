@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllNotes, fetchNewNote } from "../../store/notesReducer";
 
@@ -6,6 +7,7 @@ const NewNoteForm = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector(state => state.session.user);
     const notes = useSelector(state => state.notesReducer.userNotes);
@@ -14,11 +16,10 @@ const NewNoteForm = () => {
         if (!notes) dispatch(fetchAllNotes(user.id));
     }, [dispatch, user.id, notes]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(fetchNewNote(user.id, title, body));
-        setTitle('');
-        setBody('');
+        const note = await dispatch(fetchNewNote(user.id, title, body));
+        history.push(`/notes/${note.id}`);
     };
 
     const updateTitle = (e) => setTitle(e.target.value);

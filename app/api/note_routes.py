@@ -29,8 +29,8 @@ def create_new_note():
     if form.validate_on_submit():
         note = Note(title=form['title'].data,
                     body=form['body'].data,
-                    created_at=datetime.now(),
-                    user_id=1)  # TODO: remove when frontend form is created
+                    user_id=form['user_id'].data,
+                    created_at=datetime.now())
         db.session.add(note)
         db.session.commit()
         return note.to_dict()

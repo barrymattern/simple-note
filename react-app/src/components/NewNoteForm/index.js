@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchAllNotes, fetchNewNote } from "../../store/notesReducer";
 
 const NewNoteForm = () => {
     const [title, setTitle] = useState('');
@@ -7,10 +8,17 @@ const NewNoteForm = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user);
+    const notes = useSelector(state => state.notesReducer.userNotes);
+
+    useEffect(() => {
+        if (!notes) dispatch(fetchAllNotes(user.id));
+    }, [dispatch, user.id, notes]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('dispatch info!')
+        dispatch(fetchNewNote(user.id, title, body));
+        setTitle('');
+        setBody('');
     };
 
     const updateTitle = (e) => setTitle(e.target.value);

@@ -11,13 +11,17 @@ const AllNotes = () => {
     const allNotesObj = useSelector(state => state.notesReducer.userNotes);
 
     useEffect(() => {
-        const getUserNotes = async () => {
-            await dispatch(fetchAllNotes(user.id));
+        if (allNotesObj) {
             setLoaded(true);
-        };
+        } else {
+            const getUserNotes = async () => {
+                await dispatch(fetchAllNotes(user.id));
+                setLoaded(true);
+            };
 
-        getUserNotes();
-    }, [dispatch, user]);
+            getUserNotes(); 
+        }
+    }, [dispatch, allNotesObj, user]);
 
     if (!loaded) return null;
 

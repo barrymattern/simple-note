@@ -25,7 +25,7 @@ const NewNoteForm = () => {
 
             getUserNotes();
         }
-    }, [dispatch, user.id, notes]);
+    }, [dispatch, notes, user]);
 
     if (!loaded) return null;
 

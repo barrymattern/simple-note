@@ -36,3 +36,19 @@ def create_new_note():
         db.session.commit()
         return note.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+@note_routes.route('/<int:id>', methods=['DELETE'])
+# @login_required
+def delete_note(id):
+    '''
+    Delete Note by ID
+    '''
+    note = Note.query.get(id)
+
+    try:
+        db.session.delete(note)
+        db.session.commit()
+        return {'success': f'Note {id} deleted'}
+    except BaseException as err:
+        return {'errors': err}, 500

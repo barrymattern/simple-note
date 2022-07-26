@@ -32,7 +32,6 @@ const Note = () => {
         e.preventDefault();
         
         /** TODO
-         * Define 'DELETE' route on backend
          * Define 'deleteNote' action
          * Define 'fetchDeleteNote' thunk
          * Refactor reducer to update state correctly
@@ -51,12 +50,12 @@ const Note = () => {
                     <p>{note.body}</p>
                 </div>
             </div>
-            <div
+            <button
                 className='btn delete-btn'
                 onClick={handleClick}
             >
                 Delete
-            </div>
+            </button>
         </>
     );
 };

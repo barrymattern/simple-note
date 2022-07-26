@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllNotes } from "../../store/notesReducer";
+import { fetchAllNotes, fetchDeleteNote } from "../../store/notesReducer";
 
 const Note = () => {
     const [loaded, setLoaded] = useState(false);
     const { noteId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector(state => state.session.user);
     const allNotesObj = useSelector(state => state.notesReducer.userNotes);
@@ -28,28 +29,26 @@ const Note = () => {
 
     const note = allNotesObj.notes[noteId]
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
         
-        /** TODO
-         * Define 'deleteNote' action
-         * Define 'fetchDeleteNote' thunk
-         * Refactor reducer to update state correctly
-         * If ok, history.push('/notes')
-         */
+        await dispatch(fetchDeleteNote(noteId));
+        return history.push('/notes');
     };
 
     return (
         <>
-            <div>
+            {note &&
                 <div>
-                    <h3>{note.title}</h3>
-                    <small>{note.updatedAt}</small>
+                    <div>
+                        <h3>{note.title}</h3>
+                        <small>{note.updatedAt}</small>
+                    </div>
+                    <div>
+                        <p>{note.body}</p>
+                    </div>
                 </div>
-                <div>
-                    <p>{note.body}</p>
-                </div>
-            </div>
+            }
             <button
                 className='btn delete-btn'
                 onClick={handleClick}

@@ -46,9 +46,10 @@ def delete_note(id):
     '''
     note = Note.query.get(id)
 
-    try:
+    try:  # Should try/except block be added to all db.sessions?
         db.session.delete(note)
         db.session.commit()
-        return {'success': f'Note {id} deleted'}
+        return {'success': 'Note successfully deleted from database.',
+                'note_id': f'{id}'}
     except BaseException as err:
-        return {'errors': err}, 500
+        return {'errors': err}

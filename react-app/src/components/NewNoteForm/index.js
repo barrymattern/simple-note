@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllNotes, fetchNewNote } from "../../store/notesReducer";
 
 const NewNoteForm = () => {
+    const [loaded, setLoaded] = useState(false);
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -14,8 +15,19 @@ const NewNoteForm = () => {
     const notes = useSelector(state => state.notesReducer.userNotes);
 
     useEffect(() => {
-        if (!notes) dispatch(fetchAllNotes(user.id));
+        if (notes) {
+            setLoaded(true);
+        } else {
+            const getUserNotes = async () => {
+                await dispatch(fetchAllNotes(user.id));
+                setLoaded(true);
+            };
+
+            getUserNotes();
+        }
     }, [dispatch, user.id, notes]);
+
+    if (!loaded) return null;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
